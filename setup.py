@@ -4,11 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="data-helpy",
-    version="0.0.1",
+    name="datahelpy",
+    version="0.0.3",
     author="Angel Davila",
     author_email="adavila0703@gmail.com",
-    description="A small example package",
+    description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/adavila0703/data-helpy",
