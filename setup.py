@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="datahelpy",
-    version="0.0.3",
+    name="dbhelpy",
+    version="0.1.0",
     author="Angel Davila",
     author_email="adavila0703@gmail.com",
     description="",
