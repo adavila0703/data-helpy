@@ -146,7 +146,7 @@ def get_single_data(table, column, id):
 
     :param string table: the table would like to query
     :param string column: the column you would like to point to
-    :param string id: primary id
+    :param int id: primary id
     :returns: single cell data from a given id
     """
     connection = sqlite3.connect(database)
@@ -162,7 +162,7 @@ def update_single_column(table, column, id, data):
 
     :param string table: the table would like to query
     :param string column: the column you would like to point to
-    :param string id: primary id
+    :param int id: primary id
     :param string data: the data you would like to update with
     :returns: None
     """
