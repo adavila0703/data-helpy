@@ -1,17 +1,18 @@
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.rst", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="dbhelpy",
-    version="0.1.0",
+    version="0.2.0",
     author="Angel Davila",
     author_email="adavila0703@gmail.com",
-    description="",
+    description="dbhelpy is an easy to use Python library that allows you to interact with your sqlite database using "
+                "dbhelpy methods",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/adavila0703/data-helpy",
+    url="https://github.com/adavila0703/dbhelpy",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
