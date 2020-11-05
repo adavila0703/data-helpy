@@ -41,10 +41,3 @@ Returns::
 
     [(1, 'Mercedes-Benz', 'White', 53950), (2, 'Corvette', 'Black' , 58900)]
 
-
-Class Methods
-=========
-.. toctree::
-   :maxdepth: 2
-
-   functions
