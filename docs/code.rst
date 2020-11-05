@@ -1,5 +1,5 @@
 Class Methods
 =============
 
-.. automodule:: dbhelpy
+.. automodule:: dbhelpy.dbhelpy
     :members:
