@@ -14,6 +14,12 @@ class Helpy:
     def __exit__(self, exc_type, exc_val, exc_tb):
         """Db connection close"""
         self.connection.close()
+        return None
+
+    def __del__(self):
+        """Destructor for your object"""
+        self.connection.close()
+        return None
 
     def get_all_data(self, table):
         """
@@ -213,4 +219,3 @@ class Helpy:
         else:
             query += f' {split_str[0]}'
         return query
-

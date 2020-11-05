@@ -5,5 +5,5 @@ DBHELPY
 .. toctree::
     :maxdepth: 1
 
-    install
+    getstarted
     functions
