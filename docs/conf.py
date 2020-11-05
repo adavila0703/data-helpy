@@ -12,17 +12,17 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('../../'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'test'
-copyright = '2020, angel'
-author = 'angel'
+project = 'dbhelpy'
+copyright = '2020, Angel Davila'
+author = 'Angel Davila'
 
 # The full version, including alpha/beta/rc tags
-release = 'test'
+release = '0.1.0'
 
 
 # -- General configuration ---------------------------------------------------
