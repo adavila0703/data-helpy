@@ -75,7 +75,7 @@ class Helpy:
         :param string condition: your condition (can be multiple, make sure to follow the format in examples)
         :returns: all filtered data
         """
-        data = [x for x in self.cursor.execute(f"SELECT {column} FROM {table} {Helpy.filter_condition(condition)}")]
+        data = [x for x in self.cursor.execute(f"SELECT {column} FROM {table} {filter_condition(condition)}")]
         return data
 
     def get_calc_column(self, table, column):
@@ -190,6 +190,33 @@ class Helpy:
         data = [x for x in self.cursor.execute(f'SELECT {column} FROM {table} WHERE id = {id}')]
         return str(data[0][0])
 
+    def get_single_row(self, id, table):
+        """
+        Get all row data by id
+
+        :param int id: id
+        :param string table: table
+        :returns: single row data
+        """
+        data = self.cursor.execute(f'SELECT * FROM {table} WHERE id = {id}')
+        return data.fetchall()[0]
+
+    def search_all_data(self, table, condition):
+        """
+        Allows you to search the entire database for data.
+
+        :param string table: table
+        :param condition: search condition
+        :returns: searched data (multiples also)
+        """
+        list_data = []
+        for data in Helpy.get_all_data(self, table):
+            if condition in data:
+                list_data.append(self.get_single_row(data[0], table))
+            else:
+                pass
+        return list_data
+
     def update_single_column(self, table, column, id, data):
         """
         Updates a single column cell in your db
@@ -204,18 +231,18 @@ class Helpy:
         self.connection.commit()
         return None
 
-    @classmethod
-    def filter_condition(cls, condition):
-        split_str = condition.split()
-        count = 1
-        query = 'WHERE'
-        if len(split_str) > 1:
-            for s in split_str:
-                if count == len(split_str):
-                    query += f' {s}'
-                else:
-                    query += f' {s} AND'
-                count += 1
-        else:
-            query += f' {split_str[0]}'
-        return query
+
+def filter_condition(condition):
+    split_str = condition.split()
+    count = 1
+    query = 'WHERE'
+    if len(split_str) > 1:
+        for s in split_str:
+            if count == len(split_str):
+                query += f' {s}'
+            else:
+                query += f' {s} AND'
+            count += 1
+    else:
+        query += f' {split_str[0]}'
+    return query

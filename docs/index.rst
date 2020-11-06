@@ -34,7 +34,7 @@ Basic Concept
 |   2   | Corvette      | Black      | $58,900   |
 +-------+---------------+------------+-----------+
 
-Here is a basic example of how to use dbhelpy to quickly data from the cardata table::
+Here is an example of how to use dbhelpy to quickly pull all data from the cardata table above::
 
     from dbhelpy.dbhelpy import Helpy
 

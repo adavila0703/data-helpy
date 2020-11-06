@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dbhelpy",
-    version="0.2.0",
+    version="0.3.0",
     author="Angel Davila",
     author_email="adavila0703@gmail.com",
     description="dbhelpy is an easy to use Python library that allows you to interact with your sqlite database using "
