@@ -16,11 +16,6 @@ class Helpy:
         self.connection.close()
         return None
 
-    def __del__(self):
-        """Destructor for your object"""
-        self.connection.close()
-        return None
-
     def get_all_data(self, table):
         """
         Retrieve all data from a table.
