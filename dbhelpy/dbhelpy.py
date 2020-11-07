@@ -198,7 +198,7 @@ class Helpy:
 
     def search_all_data(self, table, condition):
         """
-        Allows you to search the entire database for data.
+        Allows you to search the entire database for data. Not case sensitive.
 
         :param string table: table
         :param condition: search condition
@@ -206,9 +206,12 @@ class Helpy:
         """
         list_data = []
         for data in Helpy.get_all_data(self, table):
-            if condition in data:
-                list_data.append(self.get_single_row(data[0], table))
-            else:
+            try:
+                if condition.lower() in str(data).lower():
+                    list_data.append(self.get_single_row(data[0], table))
+                else:
+                    pass
+            except AttributeError:
                 pass
         return list_data
 
