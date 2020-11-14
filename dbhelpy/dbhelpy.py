@@ -4,17 +4,6 @@ import sqlite3
 class Helpy:
     def __init__(self, database):
         self.database = database
-        self.connection = sqlite3.connect(self.database, check_same_thread=False)
-        self.cursor = self.connection.cursor()
-
-    def __repr__(self):
-        """Returns object string"""
-        return 'Your Helpy object'
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        """Db connection close"""
-        self.connection.close()
-        return None
 
     def get_all_data(self, table):
         """
@@ -23,7 +12,10 @@ class Helpy:
         :param string table: your table
         :returns: all data from a given table
         """
-        data = [x for x in self.cursor.execute(f'SELECT * FROM {table}')]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT * FROM {table}')]
+        connection.close()
         return data
 
     def get_all_data_by(self, table, column, condition):
@@ -37,7 +29,10 @@ class Helpy:
         :param string condition: filter condition
         :returns: all filtered data
         """
-        data = [x for x in self.cursor.execute(f'SELECT * FROM {table} WHERE {column} = ?', (condition,))]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT * FROM {table} WHERE {column} = ?', (condition,))]
+        connection.close()
         return data
 
     def get_all_column(self, table, column):
@@ -48,7 +43,10 @@ class Helpy:
         :param string column: your column
         :returns: all data from that column
         """
-        data = [x for x in self.cursor.execute(f"SELECT {column} FROM {table}")]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f"SELECT {column} FROM {table}")]
+        connection.close()
         return data
 
     def get_column_by(self, table, column, condition):
@@ -70,7 +68,10 @@ class Helpy:
         :param string condition: your condition (can be multiple, make sure to follow the format in examples)
         :returns: all filtered data
         """
-        data = [x for x in self.cursor.execute(f"SELECT {column} FROM {table} {filter_condition(condition)}")]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f"SELECT {column} FROM {table} {filter_condition(condition)}")]
+        connection.close()
         return data
 
     def get_calc_column(self, table, column):
@@ -125,7 +126,10 @@ class Helpy:
         :param string column: the column you would like sort by
         :returns: all data from the table sorted by descending
         """
-        data = [x for x in self.cursor.execute(f'SELECT * FROM {table} ORDER BY {column} DESC')]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT * FROM {table} ORDER BY {column} DESC')]
+        connection.close()
         return data
 
     def get_all_asc(self, table, column):
@@ -136,7 +140,10 @@ class Helpy:
         :param string column: the column you would like sort by
         :returns: all data from the table sorted by ascending
         """
-        data = [x for x in self.cursor.execute(f'SELECT * FROM {table} ORDER BY {column}')]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT * FROM {table} ORDER BY {column}')]
+        connection.close()
         return data
 
     def get_all_dec_by(self, table, dec_column, con_column, condition):
@@ -152,8 +159,11 @@ class Helpy:
         :param string condition: the condition that will determine your filter
         :returns: all data from the table sorted by descending and a given condition
         """
-        data = [x for x in self.cursor.execute(f'SELECT * FROM {table} WHERE {con_column} = ? ORDER BY {dec_column} '
-                                               f'DESC', (condition,))]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT * FROM {table} WHERE {con_column} = ? ORDER BY {dec_column} '
+                                          f'DESC', (condition,))]
+        connection.close()
         return data
 
     def get_all_asc_by(self, table, dec_column, con_column, condition):
@@ -169,8 +179,11 @@ class Helpy:
         :param string condition: the condition that will determine your filter
         :returns: all data from the table sorted by ascending and a given condition
         """
-        data = [x for x in self.cursor.execute(f'SELECT * FROM {table} WHERE {con_column} = ? ORDER BY {dec_column}',
-                                               (condition,))]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT * FROM {table} WHERE {con_column} = ? ORDER BY {dec_column}',
+                                          (condition,))]
+        connection.close()
         return data
 
     def get_single_data(self, table, column, id):
@@ -182,7 +195,10 @@ class Helpy:
         :param int id: primary id
         :returns: single cell data from a given id
         """
-        data = [x for x in self.cursor.execute(f'SELECT {column} FROM {table} WHERE id = {id}')]
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = [x for x in cursor.execute(f'SELECT {column} FROM {table} WHERE id = {id}')]
+        connection.close()
         return str(data[0][0])
 
     def get_single_row(self, id, table):
@@ -193,7 +209,10 @@ class Helpy:
         :param string table: table
         :returns: single row data
         """
-        data = self.cursor.execute(f'SELECT * FROM {table} WHERE id = {id}')
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        data = cursor.execute(f'SELECT * FROM {table} WHERE id = {id}')
+        connection.close()
         return data.fetchall()[0]
 
     def search_all_data(self, table, condition):
@@ -225,8 +244,11 @@ class Helpy:
         :param int data: the data you would like to update with
         :returns: None
         """
-        self.cursor.execute(f'UPDATE {table} SET {column} = {data} WHERE id = {id}')
-        self.connection.commit()
+        connection = sqlite3.connect(self.database, check_same_thread=False)
+        cursor = connection.cursor()
+        cursor.execute(f'UPDATE {table} SET {column} = {data} WHERE id = {id}')
+        connection.commit()
+        connection.close()
         return None
 
 
