@@ -166,7 +166,7 @@ class Helpy:
         connection.close()
         return data
 
-    def get_all_asc_by(self, table, dec_column, con_column, condition):
+    def get_all_asc_by(self, table, sort_column, con_column, condition):
         """
         Query your database, sort ascending by a column of choice, and specify a condition
 
@@ -174,14 +174,14 @@ class Helpy:
         price
 
         :param string table: the table would like to query
-        :param string dec_column: the column you would like sort by
-        :param string con_column: the column you would use your condition for
+        :param string sort_column: the column you would like sort by
+        :param string con_column: the column you will apply your condition to
         :param string condition: the condition that will determine your filter
         :returns: all data from the table sorted by ascending and a given condition
         """
         connection = sqlite3.connect(self.database, check_same_thread=False)
         cursor = connection.cursor()
-        data = [x for x in cursor.execute(f'SELECT * FROM {table} WHERE {con_column} = ? ORDER BY {dec_column}',
+        data = [x for x in cursor.execute(f'SELECT * FROM {table} WHERE {con_column} = ? ORDER BY {sort_column}',
                                           (condition,))]
         connection.close()
         return data
